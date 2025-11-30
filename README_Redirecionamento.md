@@ -21,6 +21,42 @@ server {
         try_files $uri /index.html;
     }
 }
+
+# No seu host crie uma outra pasta chamada de configNginx
+# Dentro dessa pasta crie um arquivo nomeado de nginx.conf
+# Abra o arquivo e copie isso em seu conteúdo
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  '$http_x_real_ip - $remote_user [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for"';
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    #tcp_nopush     on;
+
+    keepalive_timeout  65;
+
+    #gzip  on;
+
+    include /etc/nginx/conf.d/*.conf;
+}
 ```
 
 # Passo 3 - Criação dos Containers
