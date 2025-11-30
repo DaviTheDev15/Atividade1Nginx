@@ -68,7 +68,7 @@ http {
 docker run -dit -p 84:80 --name loadbalancer nginx:1.29.3-alpine
 
 # Criação do Nó
-docker run -dit --name no1 -v /var/www/html:/usr/share/nginx/html -v /home/user/configLB:/etc/nginx/conf.d nginx:1.29.3-alpine
+docker run -dit --name no1 -v /var/www/html:/usr/share/nginx/html -v /home/user/configLB:/etc/nginx/conf.d -v /home/user/configNginx:/etc/nginx/ nginx:1.29.3-alpine
 ```
 
 # Passo 4 - Pegando os IP(s) do(s) Nó(s)
